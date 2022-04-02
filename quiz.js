@@ -7,4 +7,3 @@ async function getData() {
 const api_url = 'https://opentdb.com/api.php?amount=100';
 getData();
 */
-//selecting all required elements

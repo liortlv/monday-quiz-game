@@ -56,7 +56,7 @@ h2 {
     display: none;
 }
 
-.btn {
+.button {
     font-size: 2.4rem;
     padding: 2rem 0;
     width: 30rem;
@@ -68,24 +68,24 @@ h2 {
     border-radius: 0.5rem;
 }
 
-.btn:hover {
+.button:hover {
     cursor: pointer;
     box-shadow: 0 0.4rem 1.4rem 0 rgba(216, 98, 129, 0.6);
     transition: transform 150ms;
     transform: scale(1.04);
 }
 
-.btn[disabled]:hover {
+.button[disabled]:hover {
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
 }
 
-#highscore-btn {
+#highscore-button {
     background: linear-gradient(90deg, rgb(234, 234, 127) 0%, rgb(233, 233, 130) 100%);
 }
 
-#highscore-btn:hover {
+#highscore-button:hover {
     box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 255, 0, 0.5);
 }
 
