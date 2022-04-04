@@ -89,7 +89,8 @@ h2 {
     box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 255, 0, 0.5);
 }
 
-.fa-star {
+.fa-star,
+.fa-play {
     font-size: 2.5rem;
     margin-left: 1rem;
 }
@@ -119,6 +120,18 @@ input::placeholder {
     color: #aaa;
 }
 
+#finalScore {
+    text-align: center;
+    font-size: 9rem;
+    margin-bottom: 1rem;
+}
+
+#congrats {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 4.5rem;
+}
+
 #end-text {
     margin-bottom: 2rem;
     font-size: 3rem;
@@ -135,4 +148,15 @@ input::placeholder {
 .fa-house {
     font-size: 2rem;
     margin-left: 1rem;
+}
+
+canvas {
+	cursor: crosshair;
+	display: block;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
 }
