@@ -14,6 +14,7 @@ let acceptingAnswers = true;
 let score = 0;
 let questionCounter = 0;
 let questions;
+let rightChoice;
 
 function startGame() {
     questionCounter = 0;
@@ -57,6 +58,13 @@ function getNewQuestion() {
         })
     }
 
+    // Finds the right choice after the shuffle (to mark the right answer when user is wrong)
+    choices.forEach(choice => {
+        if (btoa(choice.innerText) == currentQuestion.correct_answer) {
+            rightChoice = choice;
+    }})
+
+    console.log(atob(currentQuestion.correct_answer))
     acceptingAnswers = true;
 }
 
@@ -71,15 +79,19 @@ choices.forEach(choice => {
 
         if (classToApply === 'correct') {
             incrementScore(SCORE_POINTS);
+        } else {
+            // when user wrong, color the right answer
+            rightChoice.parentElement.classList.add('correct'); 
         }
-
+      
         // Color the container according to correct/incorrect user answer
         selectedChoice.parentElement.classList.add(classToApply);
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
+            rightChoice.parentElement.classList.remove('correct');
             getNewQuestion();
         }, 2000)
-    })
+    }) 
 })
 
 function incrementScore(num) {
@@ -99,7 +111,7 @@ function shuffleArray(array) {
 
 // Fetch questions from API in base64 encoding
 async function getApiQuestions() {
-    const API_URL = 'https://opentdb.com/api.php?amount=100&encode=base64';
+    const API_URL = 'https://opentdb.com/api.php?amount=30&encode=base64';
     const response = await fetch(API_URL);
     const data = await response.json();
     return data.results;

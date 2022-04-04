@@ -14,7 +14,9 @@ body {
     min-width: 80rem;
 }
 
-.choice-container:hover {
+.choice-container,
+.choice-container3,
+.choice-container4:hover {
     cursor: pointer;
     box-shadow: 0 0.4rem 1.4rem 0 rgba(216, 98, 129, 0.6);
     transform: scale(1.02);
