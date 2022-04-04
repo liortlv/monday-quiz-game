@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/dca2707a5a.js" crossorigin="anonymous"></script>
+    <script src="game-end.js" defer></script>
+    <title>Monday Quiz Game</title>
+</head>
+<body>
+    <div class="container">
+        <div id="end" class="flex-center flex-column">
+            <h1 id="finalScore">0</h1>
+            <form class="end-form-container">
+                <h2 id="end-text">Enter your name to save your score:</h2>
+                <input type="text" name="name" id="username" placeholder=
+                "Israel Israeli">
+                <button class="button" id="saveScoreButton" type="submit"
+                onclick="saveHighScore(event)" disabled>Save <i class="fa-solid fa-floppy-disk"></i></button>
+            </form>
+            <a href="/quiz.html" class="button">Play Again <i class="fa-solid fa-arrow-rotate-left"></i></a>
+            <a href="/" class="button">Go Home<i class="fa-solid fa-house"></i></a>
+        </div>
+    </div>
+</body>
+</html>

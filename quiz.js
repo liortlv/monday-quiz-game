@@ -7,7 +7,7 @@ const choiceContainer3 = document.querySelector('.choice-container3');
 const choiceContainer4 = document.querySelector('.choice-container4');
 
 const SCORE_POINTS = 100;
-const MAX_QUESTIONS = 25;
+const MAX_QUESTIONS = 5;
 
 let currentQuestion = {};
 let acceptingAnswers = true;
@@ -27,7 +27,7 @@ function getNewQuestion() {
     if (questionCounter >= MAX_QUESTIONS) {
         localStorage.setItem('mostRecentScore', score);
 
-        return window.location.assign('/end.html');
+        return window.location.assign('/game-end.html');
     }
 
     questionCounter++;
