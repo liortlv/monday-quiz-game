@@ -7,7 +7,7 @@ const choiceContainer3 = document.querySelector('.choice-container3');
 const choiceContainer4 = document.querySelector('.choice-container4');
 
 const SCORE_POINTS = 100;
-const MAX_QUESTIONS = 5;
+const MAX_QUESTIONS = 10;
 
 let currentQuestion = {};
 let acceptingAnswers = true;
@@ -58,8 +58,6 @@ function getNewQuestion() {
     }
 
     acceptingAnswers = true;
-    console.log(atob(currentQuestion.question));
-    console.log(atob(currentQuestion.correct_answer));
 }
 
 // When the user clicks an answer
