@@ -108,13 +108,14 @@ choices.forEach(choice => {
 function countdown() {
     if (timeLeft <= 0) {
         clearInterval(timer);
-
+        rightChoice.parentElement.classList.add('correct');
         time.innerText = timeLeft;
         question.innerText = 'Time over!';
         question.classList.add('time-out');
 
         setTimeout(() => {
             question.classList.remove('time-out');
+            rightChoice.parentElement.classList.remove('correct');
             getNewQuestion();
         }, 2000)
     } else {
