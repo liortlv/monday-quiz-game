@@ -5,6 +5,7 @@ const scoreText = document.querySelector('#score');
 const progressBarFull = document.querySelector('#progressBarFull');
 const choiceContainer3 = document.querySelector('.choice-container3');
 const choiceContainer4 = document.querySelector('.choice-container4');
+const time = document.querySelector('#time');
 
 const SCORE_POINTS = 100;
 const MAX_QUESTIONS = 10;
@@ -15,6 +16,9 @@ let score = 0;
 let questionCounter = 0;
 let questions;
 let rightChoice;
+let timePerQuestion = 300;
+let timeLeft = timePerQuestion;
+let timer;
 
 function startGame() {
     questionCounter = 0;
@@ -62,9 +66,14 @@ function getNewQuestion() {
     choices.forEach(choice => {
         if (btoa(choice.innerText) == currentQuestion.correct_answer) {
             rightChoice = choice;
-    }})
+        }
+    })
 
     console.log(atob(currentQuestion.correct_answer))
+    timeLeft = timePerQuestion;
+    time.innerText = timeLeft;
+    timer = setInterval(countdown, 1000);
+
     acceptingAnswers = true;
 }
 
@@ -72,6 +81,8 @@ function getNewQuestion() {
 choices.forEach(choice => {
     choice.addEventListener('click', e => {
         if (!acceptingAnswers) return;
+
+        clearInterval(timer);
 
         acceptingAnswers = false;
         const selectedChoice = e.target;
@@ -81,9 +92,9 @@ choices.forEach(choice => {
             incrementScore(SCORE_POINTS);
         } else {
             // when user wrong, color the right answer
-            rightChoice.parentElement.classList.add('correct'); 
+            rightChoice.parentElement.classList.add('correct');
         }
-      
+
         // Color the container according to correct/incorrect user answer
         selectedChoice.parentElement.classList.add(classToApply);
         setTimeout(() => {
@@ -91,8 +102,26 @@ choices.forEach(choice => {
             rightChoice.parentElement.classList.remove('correct');
             getNewQuestion();
         }, 2000)
-    }) 
+    })
 })
+
+function countdown() {
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+
+        time.innerText = timeLeft;
+        question.innerText = 'Time over!';
+        question.classList.add('time-out');
+
+        setTimeout(() => {
+            question.classList.remove('time-out');
+            getNewQuestion();
+        }, 2000)
+    } else {
+        time.innerText = timeLeft;
+        timeLeft -= 1;
+    }
+}
 
 function incrementScore(num) {
     score += num;

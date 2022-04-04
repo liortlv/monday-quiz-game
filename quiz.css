@@ -14,8 +14,8 @@ body {
     min-width: 80rem;
 }
 
-.choice-container,
-.choice-container3,
+.choice-container:hover,
+.choice-container3:hover,
 .choice-container4:hover {
     cursor: pointer;
     box-shadow: 0 0.4rem 1.4rem 0 rgba(216, 98, 129, 0.6);
@@ -73,6 +73,10 @@ background: linear-gradient(32deg, rgb(11, 223, 36) 0%, rgb(41, 232, 111) 100%);
 
 .hidden {
     display: none;
+}
+
+.time-out {
+    color: rgb(236, 15, 15);
 }
 
 
