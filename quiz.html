@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="quiz.css">
     <script src="quiz.js" defer></script>
+    <script src="https://kit.fontawesome.com/dca2707a5a.js" crossorigin="anonymous"></script>
     <title>Monday Quiz Game</title>
 </head>
 
@@ -38,7 +39,13 @@
                     </h1>
                 </div>
             </div>
-            <h1 id="question"></h1>
+            <div class="gameplay-container">
+                <h1 id="question"></h1>
+                <div class="helpers">
+                    <div class="extra-button hovered" id="next-question"><i class="fa-solid fa-forward"></i>Skip Question</div>
+                    <div class="extra-button hovered" id="extra-time"><i class="fa-solid fa-stopwatch-20"></i>Extra Time</div>
+                </div>
+            </div>
             <div class="choice-container">
                 <div class="choice-prefix">A</div>
                 <div class="choice-text"></div>

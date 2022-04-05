@@ -6,6 +6,8 @@ const progressBarFull = document.querySelector('#progressBarFull');
 const choiceContainer3 = document.querySelector('.choice-container3');
 const choiceContainer4 = document.querySelector('.choice-container4');
 const time = document.querySelector('#time');
+const extraTime = document.querySelector('#extra-time');
+const nextQuestion = document.querySelector('#next-question');
 
 const SCORE_POINTS = 100;
 const MAX_QUESTIONS = 10;
@@ -92,30 +94,54 @@ choices.forEach(choice => {
             incrementScore(SCORE_POINTS);
         } else {
             // when user wrong, color the right answer
-            rightChoice.parentElement.classList.add('correct');
+            revealCorrectAnswer();
         }
 
         // Color the container according to correct/incorrect user answer
         selectedChoice.parentElement.classList.add(classToApply);
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
-            rightChoice.parentElement.classList.remove('correct');
             getNewQuestion();
         }, 2000)
     })
 })
 
+// Extra 20 seconds button
+extraTime.addEventListener('click', e => {
+    timeLeft += 20;
+    extraTime.classList.add('crossed');
+    extraTime.classList.remove('hovered');
+}, { once: true })
+
+// Skip question button
+nextQuestion.addEventListener('click', e => {
+    revealCorrectAnswer();
+    setTimeout(() => {
+        questionCounter--;
+        questions.shift();
+        getNewQuestion();
+    }, 2000)
+    nextQuestion.classList.add('crossed');
+    nextQuestion.classList.remove('hovered');
+}, { once: true })
+
+function revealCorrectAnswer() {
+    clearInterval(timer);
+    rightChoice.parentElement.classList.add('correct');
+    setTimeout(() => {
+        rightChoice.parentElement.classList.remove('correct');
+    }, 2000)
+}
+
 function countdown() {
     if (timeLeft <= 0) {
-        clearInterval(timer);
-        rightChoice.parentElement.classList.add('correct');
+        revealCorrectAnswer();
         time.innerText = timeLeft;
         question.innerText = 'Time over!';
         question.classList.add('time-out');
 
         setTimeout(() => {
             question.classList.remove('time-out');
-            rightChoice.parentElement.classList.remove('correct');
             getNewQuestion();
         }, 2000)
     } else {
