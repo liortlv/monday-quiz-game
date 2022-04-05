@@ -124,6 +124,10 @@ body {
     color: rgb(236, 15, 15);
 }
 
+.combo {
+    color: rgb(0, 238, 255);
+}
+
 .crossed {
      background: 
          linear-gradient(to top left,

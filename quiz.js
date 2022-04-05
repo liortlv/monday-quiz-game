@@ -21,6 +21,7 @@ let rightChoice;
 let timePerQuestion = 30;
 let timeLeft = timePerQuestion;
 let timer;
+let scoreCombo = 0;
 
 function startGame() {
     questionCounter = 0;
@@ -91,8 +92,20 @@ choices.forEach(choice => {
         let classToApply = btoa(selectedChoice.innerText) == currentQuestion.correct_answer ? 'correct' : 'incorrect';
 
         if (classToApply === 'correct') {
-            incrementScore(SCORE_POINTS);
+            scoreCombo++;
+            if (scoreCombo >= 2) {
+                incrementScore(SCORE_POINTS + scoreCombo * 50);
+                question.innerText = `Combo! ${scoreCombo} consecutive correct answers!`;
+                question.classList.add('combo');
+                setTimeout(() => {
+                    question.classList.remove('combo');
+                }, 3000)
+                
+            } else {
+                incrementScore(SCORE_POINTS);
+            }
         } else {
+            scoreCombo = 0;
             // when user wrong, color the right answer
             revealCorrectAnswer();
         }
@@ -102,7 +115,7 @@ choices.forEach(choice => {
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
             getNewQuestion();
-        }, 2000)
+        }, 3000)
     })
 })
 
@@ -120,7 +133,7 @@ nextQuestion.addEventListener('click', e => {
         questionCounter--;
         questions.shift();
         getNewQuestion();
-    }, 2000)
+    }, 3000)
     nextQuestion.classList.add('crossed');
     nextQuestion.classList.remove('hovered');
 }, { once: true })
@@ -130,7 +143,7 @@ function revealCorrectAnswer() {
     rightChoice.parentElement.classList.add('correct');
     setTimeout(() => {
         rightChoice.parentElement.classList.remove('correct');
-    }, 2000)
+    }, 3000)
 }
 
 function countdown() {
@@ -139,14 +152,15 @@ function countdown() {
         time.innerText = timeLeft;
         question.innerText = 'Time over!';
         question.classList.add('time-out');
+        scoreCombo = 0;
 
         setTimeout(() => {
             question.classList.remove('time-out');
             getNewQuestion();
-        }, 2000)
+        }, 3000)
     } else {
-        time.innerText = timeLeft;
         timeLeft -= 1;
+        time.innerText = timeLeft;
     }
 }
 
