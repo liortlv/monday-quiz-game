@@ -10,7 +10,7 @@ const extraTime = document.querySelector('#extra-time');
 const nextQuestion = document.querySelector('#next-question');
 
 const SCORE_POINTS = 100;
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 5;
 
 let currentQuestion = {};
 let acceptingAnswers = true;
