@@ -72,7 +72,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    justify-content: end;
+    justify-content: center;
     margin-bottom: 7rem;
 }
 
@@ -141,8 +141,54 @@ body {
             rgba(255, 255, 255, 0) 100%)
 }
 
+/* CSS Mobile */
 @media screen and (max-width: 768px) {
-    .choice-container {
-        min-width: 40rem;
+    .choice-container,
+    .choice-container3,
+    .choice-container4 {
+        min-width: 30rem;
+        height: 4rem;
+        font-size: 2.5rem;
+        align-items: center;
+    }
+
+    #question {
+        font-size: 2.5rem;
+    }
+
+    .extra-button {
+        min-width: 7rem;
+        height: 4rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        gap: 0.3rem;
+    }
+
+    .fa-stopwatch-20,
+    .fa-forward {
+        font-size: 2rem;
+    }
+
+    .gameplay-container {
+        min-height: 10rem;
+    }
+
+
+    .hud-prefix {
+        font-size: 1.5rem;
+        color: #F7F5F2;
+    }
+
+    .hud-main-text {
+        font-size: 4rem;
+    }
+
+    #progressBar {
+        width: 10rem;
+        height: 2rem;
+    }
+
+    .gameplay-container {
+        gap: 2rem;
     }
 }
