@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,13 +11,28 @@
     <script src="https://kit.fontawesome.com/dca2707a5a.js" crossorigin="anonymous"></script>
     <title>Monday Quiz Game</title>
 </head>
+
 <body>
     <div class="container">
         <div id="highScores" class="flex-center flex-column">
             <h1 id="finalScore">Leaderboard</h1>
-            <ul id="highScoresList"></ul>
+            <div class="scores-container">
+                <div class="level-container">
+                    <h2 class="level">Easy</h2>
+                    <ul id="easyScoresList"></ul>
+                </div>
+                <div class="level-container">
+                    <h2 class="level">Medium</h2>
+                    <ul id="mediumScoresList"></ul>
+                </div>
+                <div class="level-container">
+                    <h2 class="level">Hard</h2>
+                    <ul id="hardScoresList"></ul>
+                </div>
+            </div>
             <a href="/" class="button">Go Home<i class="fa-solid fa-house"></i></a>
         </div>
     </div>
 </body>
+
 </html>

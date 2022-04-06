@@ -2,9 +2,12 @@ body {
     color: #fff;
 }
 
-#highScoresList {
+#easyScoresList,
+#mediumScoresList,
+#hardScoresList {
     list-style: none;
     margin-bottom: 4rem;
+    text-align: center;
 }
 
 .high-score {
@@ -12,13 +15,39 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.scores-container {
+    display: flex;
+    gap: 7rem;
+    margin: 1rem 0 3rem 0;
+    justify-content: center;
+}
+
+.level {
+    margin-bottom: 1rem;
+    font-size: 4.4rem;
+    text-align: center;
+}
+
+
 /* CSS Mobile */
 @media screen and (max-width: 768px) {
-    #finalScore  {
+    #finalScore {
         font-size: 5rem;
     }
 
     .high-score {
         font-size: 2.2rem;
+    }
+
+    .level {
+        font-size: 2.5rem;
+    }
+
+    .high-score {
+        font-size: 1.5rem;
+    }
+
+    .scores-container {
+        gap: 2rem;
     }
 }

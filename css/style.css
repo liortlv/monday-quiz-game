@@ -12,6 +12,11 @@
     font-family: 'Chakra Petch', cursive;
 }
 
+#canvas {
+    width: 100%;
+    height: 100%;
+}
+
 h1 {
     font-size: 6rem;
     color: #F7F5F2;
@@ -90,11 +95,23 @@ h2 {
     box-shadow: 0 0.4rem 1.4rem 0 rgba(149, 209, 204, 0.5);
 }
 
+.levelButton {
+    margin: 2rem;
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.levelButton:hover {
+    transition: transform 150ms;
+    transform: scale(1.2);
+}
+
 .fa-star,
 .fa-play {
     font-size: 2.5rem;
     margin-left: 1rem;
 }
+
 
 /* End Page CSS Below */
 
@@ -153,14 +170,14 @@ input::placeholder {
 }
 
 canvas {
-	cursor: crosshair;
-	display: block;
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:-1;
+    cursor: crosshair;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 /* End Page CSS Mobile */
@@ -178,7 +195,7 @@ canvas {
         padding: 1.5rem;
         font-size: 1.8rem;
     }
-   
+
     #congrats {
         font-size: 3.5rem;
     }

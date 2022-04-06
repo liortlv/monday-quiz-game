@@ -72,7 +72,6 @@ function getNewQuestion() {
         }
     })
 
-    console.log(atob(currentQuestion.correct_answer))
     timeLeft = timePerQuestion;
     time.innerText = timeLeft;
     timer = setInterval(countdown, 1000);
@@ -100,7 +99,7 @@ choices.forEach(choice => {
                 setTimeout(() => {
                     question.classList.remove('combo');
                 }, 3000)
-                
+
             } else {
                 incrementScore(SCORE_POINTS);
             }
@@ -134,6 +133,7 @@ nextQuestion.addEventListener('click', e => {
         questions.shift();
         getNewQuestion();
     }, 3000)
+
     nextQuestion.classList.add('crossed');
     nextQuestion.classList.remove('hovered');
 }, { once: true })
@@ -150,7 +150,7 @@ function countdown() {
     if (timeLeft <= 0) {
         revealCorrectAnswer();
         time.innerText = timeLeft;
-        question.innerText = 'Time over!';
+        question.innerText = 'Time is over!';
         question.classList.add('time-out');
         scoreCombo = 0;
 
@@ -181,7 +181,17 @@ function shuffleArray(array) {
 
 // Fetch questions from API in base64 encoding
 async function getApiQuestions() {
-    const API_URL = 'https://opentdb.com/api.php?amount=30&encode=base64';
+    let API_URL;
+    if (sessionStorage.getItem('level') == 'easy') {
+        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=easy&encode=base64';
+    }
+    if (sessionStorage.getItem('level') == 'medium') {
+        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=medium&encode=base64';
+    }
+    if (sessionStorage.getItem('level') == 'hard') {
+        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=hard&encode=base64';
+    }
+
     const response = await fetch(API_URL);
     const data = await response.json();
     return data.results;
