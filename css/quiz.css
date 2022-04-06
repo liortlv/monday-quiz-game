@@ -1,5 +1,5 @@
 body {
-    color: #fff;
+    color: rgb(0, 0, 0);
 }
 
 .choice-container,
@@ -9,7 +9,7 @@ body {
     margin-bottom: 0.8rem;
     width: 100%;
     border-radius: 5px;
-    background: rgb(245, 109, 145);
+    background: rgb(149, 209, 204);
     font-size: 3rem;
     min-width: 80rem;
 }
@@ -18,14 +18,14 @@ body {
 .choice-container3:hover,
 .choice-container4:hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(216, 98, 129, 0.6);
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(149, 209, 204, 0.6);
     transform: scale(1.03);
     transition: tramsform 100ms;
 }
 
 .choice-prefix {
     padding: 2rem 2.5rem;
-    color: white;
+    color: black;
 }
 
 .choice-text {
@@ -50,6 +50,7 @@ body {
 .hud-prefix {
     text-align: center;
     font-size: 2rem;
+    color: #F7F5F2;
 }
 
 .hud-main-text {
@@ -75,22 +76,23 @@ body {
     margin-bottom: 7rem;
 }
 
-.extra-button{
+.extra-button {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     min-width: 12rem;
     height: 8rem;
-    background: rgb(245, 109, 145);
+    background: rgb(250, 255, 175);
     border-radius: 10px;
     font-size: 1.5rem;
     gap: 0.5rem;
+    color: #22577E;
 }
 
 .hovered:hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(216, 98, 129, 0.6);
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(250, 255, 175, 0.6);
     transform: scale(1.09);
     transition: tramsform 100ms;
 }
@@ -104,7 +106,7 @@ body {
 #progressBar {
     width: 20rem;
     height: 3rem;
-    border: 0.2rem solid rgb(11, 223, 36);
+    border: 0.2rem solid rgb(250, 255, 175);
     margin-top: 2rem;
     border-radius: 50px;
     overflow: hidden;
@@ -112,7 +114,7 @@ body {
 
 #progressBarFull {
     height: 100%;
-    background: rgb(11, 223, 36);
+    background: rgb(250, 255, 175);
     width: 0%;
 }
 
@@ -121,21 +123,22 @@ body {
 }
 
 .time-out {
-    color: rgb(236, 15, 15);
+    color: rgba(242, 118, 118, 0.882);
 }
 
 .combo {
-    color: rgb(0, 238, 255);
+    color: rgb(236, 242, 145);
 }
 
 .crossed {
-     background: 
-         linear-gradient(to top left,
-             rgba(0,0,0,0) 0%,
-             rgba(0,0,0,0) calc(50% - 3px),
-             rgba(0,0,0,1) 50%,
-             rgba(0,0,0,0) calc(50% + 3px),
-             rgba(0,0,0,0) 100%)
+    color: #F7F5F2;
+    background:
+        linear-gradient(to top left,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0) calc(50% - 3px),
+            rgba(255, 255, 255, 1) 50%,
+            rgba(255, 255, 255, 0) calc(50% + 3px),
+            rgba(255, 255, 255, 0) 100%)
 }
 
 @media screen and (max-width: 768px) {

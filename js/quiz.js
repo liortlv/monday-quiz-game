@@ -18,7 +18,7 @@ let score = 0;
 let questionCounter = 0;
 let questions;
 let rightChoice;
-let timePerQuestion = 30;
+let timePerQuestion = 20;
 let timeLeft = timePerQuestion;
 let timer;
 let scoreCombo = 0;
