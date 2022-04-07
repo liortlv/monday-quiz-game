@@ -43,14 +43,14 @@ function getNewQuestion() {
     progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
 
     currentQuestion = questions[questionCounter];
-    question.innerText = atob(currentQuestion.question);
+    question.innerText = htmlDecode(currentQuestion.question);
 
     const allChoices = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
 
     shuffleArray(allChoices);
 
     // For true/false question hides the 3rd and 4th choices
-    if (currentQuestion.type == btoa('boolean')) {
+    if (currentQuestion.type == 'boolean') {
         choiceContainer3.classList.add('hidden');
         choiceContainer4.classList.add('hidden');
         choices[0].innerText = 'True';
@@ -60,14 +60,14 @@ function getNewQuestion() {
         choiceContainer4.classList.remove('hidden');
         let choiceCounter = 0;
         choices.forEach(choice => {
-            choice.innerText = atob(allChoices[choiceCounter]);
+            choice.innerText = htmlDecode(allChoices[choiceCounter]);
             choiceCounter++;
         })
     }
 
     // Finds the right choice after the shuffle (to mark the right answer when user is wrong)
     choices.forEach(choice => {
-        if (btoa(choice.innerText) == currentQuestion.correct_answer) {
+        if (choice.innerText == htmlDecode(currentQuestion.correct_answer)) {
             rightChoice = choice;
         }
     })
@@ -88,7 +88,7 @@ choices.forEach(choice => {
 
         acceptingAnswers = false;
         const selectedChoice = e.target;
-        let classToApply = btoa(selectedChoice.innerText) == currentQuestion.correct_answer ? 'correct' : 'incorrect';
+        let classToApply = selectedChoice.innerText == htmlDecode(currentQuestion.correct_answer) ? 'correct' : 'incorrect';
 
         if (classToApply === 'correct') {
             scoreCombo++;
@@ -179,17 +179,23 @@ function shuffleArray(array) {
     }
 }
 
-// Fetch questions from API in base64 encoding
+// Decodes the api data to readable text form
+function htmlDecode(input) {
+    let doc = new DOMParser().parseFromString(input, "text/html");
+    return doc.documentElement.textContent;
+}
+
+// Fetch questions from API
 async function getApiQuestions() {
     let API_URL;
     if (sessionStorage.getItem('level') == 'easy') {
-        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=easy&encode=base64';
+        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=easy';
     }
     if (sessionStorage.getItem('level') == 'medium') {
-        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=medium&encode=base64';
+        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=medium';
     }
     if (sessionStorage.getItem('level') == 'hard') {
-        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=hard&encode=base64';
+        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=hard';
     }
 
     const response = await fetch(API_URL);
