@@ -9,6 +9,11 @@ const time = document.querySelector('#time');
 const extraTime = document.querySelector('#extra-time');
 const nextQuestion = document.querySelector('#next-question');
 
+const correctSound = new Audio();
+correctSound.src = "assets/correct-answer.wav"
+const incorrectSound = new Audio();
+incorrectSound.src = "assets/incorrect-answer.wav"
+
 const SCORE_POINTS = 100;
 const MAX_QUESTIONS = 5;
 
@@ -85,13 +90,14 @@ choices.forEach(choice => {
         if (!acceptingAnswers) return;
 
         clearInterval(timer);
-
+   
         acceptingAnswers = false;
         const selectedChoice = e.target;
         let classToApply = selectedChoice.innerText == htmlDecode(currentQuestion.correct_answer) ? 'correct' : 'incorrect';
 
         if (classToApply === 'correct') {
             scoreCombo++;
+            correctSound.play();
             if (scoreCombo >= 2) {
                 incrementScore(SCORE_POINTS + scoreCombo * 50);
                 question.innerText = `Combo! ${scoreCombo} consecutive correct answers!`;
@@ -105,6 +111,7 @@ choices.forEach(choice => {
             }
         } else {
             scoreCombo = 0;
+            incorrectSound.play();
             // when user wrong, color the right answer
             revealCorrectAnswer();
         }
