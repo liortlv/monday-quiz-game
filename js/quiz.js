@@ -98,7 +98,7 @@ choices.forEach(choice => {
                 question.classList.add('combo');
                 setTimeout(() => {
                     question.classList.remove('combo');
-                }, 3000)
+                }, 2000)
 
             } else {
                 incrementScore(SCORE_POINTS);
@@ -114,7 +114,7 @@ choices.forEach(choice => {
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
             getNewQuestion();
-        }, 3000)
+        }, 2000)
     })
 })
 
@@ -132,7 +132,7 @@ nextQuestion.addEventListener('click', e => {
         questionCounter--;
         questions.shift();
         getNewQuestion();
-    }, 3000)
+    }, 2000)
 
     nextQuestion.classList.add('crossed');
     nextQuestion.classList.remove('hovered');
@@ -143,7 +143,7 @@ function revealCorrectAnswer() {
     rightChoice.parentElement.classList.add('correct');
     setTimeout(() => {
         rightChoice.parentElement.classList.remove('correct');
-    }, 3000)
+    }, 2000)
 }
 
 function countdown() {
@@ -157,7 +157,7 @@ function countdown() {
         setTimeout(() => {
             question.classList.remove('time-out');
             getNewQuestion();
-        }, 3000)
+        }, 2000)
     } else {
         timeLeft -= 1;
         time.innerText = timeLeft;
