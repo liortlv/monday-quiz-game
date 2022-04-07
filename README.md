@@ -13,4 +13,4 @@ Instructions:
 
 Good luck!
 
-![Screenshot of the game](/assets/screenshot.png)
+![Screenshot of the game](/assets/Screenshot.png)
