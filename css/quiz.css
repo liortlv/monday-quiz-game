@@ -143,6 +143,7 @@ body {
 
 /* CSS Mobile */
 @media screen and (max-width: 768px) {
+
     .choice-container,
     .choice-container3,
     .choice-container4 {
@@ -190,5 +191,13 @@ body {
 
     .gameplay-container {
         gap: 2rem;
+    }
+
+    .choice-container:hover,
+    .choice-container3:hover,
+    .choice-container4:hover {
+        transition: none;
+        transform: none;
+        box-shadow: none;
     }
 }
