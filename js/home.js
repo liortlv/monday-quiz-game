@@ -5,18 +5,16 @@ const mediumButton = document.createElement("div");
 const hardButton = document.createElement("div");
 
 playButton.addEventListener('click', e => {
-    playButton.append(easyButton);
-    playButton.append(mediumButton);
-    playButton.append(hardButton);
-
-    easyButton.innerText = 'Easy';
-    mediumButton.innerText = 'Medium';
-    hardButton.innerText = 'Hard';
-
-    easyButton.classList.add('levelButton');
-    mediumButton.classList.add('levelButton');
-    hardButton.classList.add('levelButton');
+    showLevel(easyButton, 'Easy');
+    showLevel(mediumButton, 'Medium');
+    showLevel(hardButton, 'Hard');
 }, { once: true })
+
+function showLevel(button, level) {
+    playButton.append(button);
+    button.innerText = level;
+    button.classList.add('levelButton');
+}
 
 easyButton.addEventListener('click', e => {
     sessionStorage.setItem('level', 'easy');

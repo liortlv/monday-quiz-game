@@ -44,30 +44,20 @@ function getNewQuestion() {
     }
 
     questionCounter++;
-    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
-    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+    progressBarUpdate();
 
     currentQuestion = questions[questionCounter];
     question.innerText = htmlDecode(currentQuestion.question);
 
     const allChoices = [...currentQuestion.incorrect_answers, currentQuestion.correct_answer];
 
-    shuffleArray(allChoices);
+    shuffleQuestions(allChoices);
 
     // For true/false question hides the 3rd and 4th choices
     if (currentQuestion.type == 'boolean') {
-        choiceContainer3.classList.add('hidden');
-        choiceContainer4.classList.add('hidden');
-        choices[0].innerText = 'True';
-        choices[1].innerText = 'False';
+        populateBooleanQuestion();
     } else {
-        choiceContainer3.classList.remove('hidden');
-        choiceContainer4.classList.remove('hidden');
-        let choiceCounter = 0;
-        choices.forEach(choice => {
-            choice.innerText = htmlDecode(allChoices[choiceCounter]);
-            choiceCounter++;
-        })
+        populateQuestion(allChoices);
     }
 
     // Finds the right choice after the shuffle (to mark the right answer when user is wrong)
@@ -77,11 +67,36 @@ function getNewQuestion() {
         }
     })
 
+    setTimer();
+    acceptingAnswers = true;
+}
+
+function progressBarUpdate() {
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
+    progressBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+}
+
+function populateQuestion(allChoices) {
+    choiceContainer3.classList.remove('hidden');
+    choiceContainer4.classList.remove('hidden');
+    let choiceCounter = 0;
+    choices.forEach(choice => {
+        choice.innerText = htmlDecode(allChoices[choiceCounter]);
+        choiceCounter++;
+    })
+}
+
+function populateBooleanQuestion() {
+    choiceContainer3.classList.add('hidden');
+    choiceContainer4.classList.add('hidden');
+    choices[0].innerText = 'True';
+    choices[1].innerText = 'False';
+}
+
+function setTimer() {
     timeLeft = timePerQuestion;
     time.innerText = timeLeft;
     timer = setInterval(countdown, 1000);
-
-    acceptingAnswers = true;
 }
 
 // When the user clicks an answer
@@ -90,25 +105,13 @@ choices.forEach(choice => {
         if (!acceptingAnswers) return;
 
         clearInterval(timer);
-   
+
         acceptingAnswers = false;
         const selectedChoice = e.target;
         let classToApply = selectedChoice.innerText == htmlDecode(currentQuestion.correct_answer) ? 'correct' : 'incorrect';
 
         if (classToApply === 'correct') {
-            scoreCombo++;
-            correctSound.play();
-            if (scoreCombo >= 2) {
-                incrementScore(SCORE_POINTS + scoreCombo * 50);
-                question.innerText = `Combo! ${scoreCombo} consecutive correct answers!`;
-                question.classList.add('combo');
-                setTimeout(() => {
-                    question.classList.remove('combo');
-                }, 2000)
-
-            } else {
-                incrementScore(SCORE_POINTS);
-            }
+            handleCorrectAnswer();
         } else {
             scoreCombo = 0;
             incorrectSound.play();
@@ -153,6 +156,22 @@ function revealCorrectAnswer() {
     }, 2000)
 }
 
+function handleCorrectAnswer() {
+    scoreCombo++;
+    correctSound.play();
+    if (scoreCombo >= 2) {
+        incrementScore(SCORE_POINTS + scoreCombo * 50);
+        question.innerText = `Combo! ${scoreCombo} consecutive correct answers!`;
+        question.classList.add('combo');
+        setTimeout(() => {
+            question.classList.remove('combo');
+        }, 2000)
+
+    } else {
+        incrementScore(SCORE_POINTS);
+    }
+}
+
 function countdown() {
     if (timeLeft <= 0) {
         revealCorrectAnswer();
@@ -177,7 +196,7 @@ function incrementScore(num) {
 }
 
 // Randomize array in-place using Durstenfeld shuffle algorithm */
-function shuffleArray(array) {
+function shuffleQuestions(array) {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         let temp = array[i];
@@ -194,17 +213,9 @@ function htmlDecode(input) {
 
 // Fetch questions from API
 async function getApiQuestions() {
-    let API_URL;
-    if (sessionStorage.getItem('level') == 'easy') {
-        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=easy';
-    }
-    if (sessionStorage.getItem('level') == 'medium') {
-        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=medium';
-    }
-    if (sessionStorage.getItem('level') == 'hard') {
-        API_URL = 'https://opentdb.com/api.php?amount=10&difficulty=hard';
-    }
-
+    // level-easy/medium/hard questions by user choice 
+    let API_URL = `https://opentdb.com/api.php?amount=10&difficulty=${sessionStorage.getItem('level')}`;
+    console.log(API_URL)
     const response = await fetch(API_URL);
     const data = await response.json();
     return data.results;

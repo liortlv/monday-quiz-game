@@ -5,7 +5,13 @@ const easyScores = JSON.parse(localStorage.getItem('easyHighScores')) || [];
 const mediumScores = JSON.parse(localStorage.getItem('mediumHighScores')) || [];
 const hardScores = JSON.parse(localStorage.getItem('hardHighScores')) || [];
 
-function printScores(scores, scoresList) {
+function printAllScores(level,levelScores,levelScoresList) {
+    demoScores[level].forEach(score => levelScores.push(score));
+    sortScores(levelScores);
+    printScoreByLevel(levelScores,levelScoresList)
+}
+
+function printScoreByLevel(scores, scoresList) {
     scores.map(score => {
         const li = document.createElement('li');
         li.classList.add('high-score');
@@ -13,6 +19,14 @@ function printScores(scores, scoresList) {
         scoresList.appendChild(li);
     })
 }
+
+function sortScores(scores) {
+    scores.sort((a, b) => {
+        return b.score - a.score;
+    })
+    scores.splice(5);
+}
+
 
 // Adding demo scores so it won't look empty when no scores
 // entered yet. When score is saved
@@ -60,21 +74,6 @@ const demoScores = {
     }],
 }
 
-function sortScores(scores) {
-    scores.sort((a, b) => {
-        return b.score - a.score;
-    })
-    scores.splice(5);
-}
-
-demoScores.easy.forEach(score => easyScores.push(score));
-demoScores.medium.forEach(score => mediumScores.push(score));
-demoScores.hard.forEach(score => hardScores.push(score));
-
-sortScores(easyScores);
-sortScores(mediumScores);
-sortScores(hardScores);
-
-printScores(easyScores, easyScoresList);
-printScores(mediumScores, mediumScoresList);
-printScores(hardScores, hardScoresList);
+printAllScores('easy',easyScores,easyScoresList);
+printAllScores('medium',mediumScores,mediumScoresList);
+printAllScores('hard',hardScores,hardScoresList);
